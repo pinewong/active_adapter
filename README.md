@@ -1,8 +1,6 @@
 # ActiveAdapter
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/active_adapter`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Simple implementation of the adapter pattern.
 
 ## Installation
 
@@ -22,7 +20,39 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Define your adaptable classes:
+
+```ruby
+# vehicle.rb
+class Vehicle < ActiveAdapter::Engine; end
+```
+
+```ruby
+# vehicle_adapters/abstract.rb
+class VehicleAdapters::Abstract < ActiveAdapter::Abstract
+  def run
+    adapter.run
+  end
+end
+```
+
+```ruby
+# vehicle_adapters/car.rb
+class VehicleAdapters::Car < ActiveAdapter::Implement
+  def run
+    "Car running..."
+  end
+end
+```
+
+Now you can use the adapter pattern as simple as you see:
+
+```ruby
+vehicle = Vehicle.adapt(:car)
+vehicle.run # => "Car running..."
+```
+
+See complete abilities of ActiveAdapter, please follow [Spec files](https://github.com/pinewong/active_adapter/blob/master/spec/active_adapter_spec.rb)
 
 ## Development
 
