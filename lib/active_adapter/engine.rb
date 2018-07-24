@@ -1,10 +1,6 @@
 module ActiveAdapter
   class Engine
     class << self
-      def adapters
-        @adapters ||= {}
-      end
-
       # To adapt engine object for a real object
       # @param adapter [#to_sym] Adapter class name
       # @return [Object] The real object with a adapter
@@ -43,6 +39,10 @@ module ActiveAdapter
       end
 
       private
+
+      def adapters
+        @adapters ||= {}
+      end
 
       def get_implement_adapter_class(module_name, adapter)
         "#{module_name}::#{adapter.to_s.camelize}".constantize
